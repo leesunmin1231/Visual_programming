@@ -1,0 +1,75 @@
+우리의 마블
+세계 10개 도시 여행, 플레이어 2명
+주사위를 던져서 이동
+플레이어는 초기 돈 5000원
+컴퓨터가 자동으로 2명 play
+
+규칙
+player 1 -> player2 순서로 진행
+- 주사위 굴림 이동
+- 비어있는 도시는 무조건 구매 , 본인의 도시인 경우 아무 행동 안함. 상대방 도시면 통행료 600원
+- 도시 구매는 300원
+- 돈 부족하면 구매 못함
+
+도시를 표시할 때 
+하와이(도시 소유자)
+플레이어 말의 위치 
+
+이런식으로 표시
+
+돈이 다 떨어져 통행료 낼 수 없으면 플레이어 탈락
+현금이 없으면 게임 종료
+돈이 없으면 도시 구매 불가지만 게임이 끝난 것은 아님. 통행료 못내면 탈락
+라운드는 30 라운드까지. 그전에 종료할 수도 있고 모두 진행될 수 도 있다.
+
+class main: # main 게임 진행 클래스
+멤버 변수
+ - city (list)
+ - round (int) =0
+ - player 객체 1, 2
+멤버 함수
+ - 게임 시작 (안내 멘트)
+ - Draw_board class 호출 # 현재 정보대로 보드 그림
+ - 주사위 굴림
+ - player1 이동
+	player1.setlocation() # 위치 바꿈
+	- 도시 주인 확인. player1.getbought_city(), player2. getbought_city()
+		도시가 내거인 경우
+			player2로 턴넘김
+		도시가 상대방꺼인 경우
+			if player1.getmoney()>600:
+				통행료 지불 - player1. setmoney(), player2.setmoney
+			else: 
+				game_over()
+		도시가 비어있는 경우
+			if player1.getmoney()>300:
+				도시 구매 - player1.setmoney(), player1.setbought_city()
+			else:
+				pass
+ - player2 이동
+	==same
+
+
+class Player: # player 정보 담은 class
+ 멤버 변수
+ 	- name
+	- location -> 현재 위치한 도시
+	- bought_city -> 이 플레이어가 구매한 도시 (리스트)
+	- money -> 현재 가지고 있는 돈
+ 멤버 함수
+ - __init__ 생성자 (self, name) 
+	self.name=name
+ - getname()
+ - getlocation()
+ - getbought_city()
+ - getmoney()
+ - setlocation()
+ - setbought_city()
+ - setmoney
+
+class Draw_board: # 보드 그려줌
+멤버 함수
+ - __init__(self, player1, player2) # player 1,2 객체를 인자로 받는다.
+	self.p1_name=player1.getname()
+	self.p1_location=player1.getlocation()
+ - draw()

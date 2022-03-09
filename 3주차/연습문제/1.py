@@ -1,0 +1,6 @@
+A=int(input("숫자를 입력하시오: "))
+B=int(input("숫자를 입력하시오: "))
+print("%d + %d = %d"%(A,B,A+B))
+print("%d - %d = %d"%(A,B,A-B))
+print("%d * %d = %d"%(A,B,A*B))
+print("%d / %d = %d"%(A,B,A/B))
